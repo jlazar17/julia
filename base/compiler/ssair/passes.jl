@@ -830,7 +830,7 @@ function sroa_mutables!(ir::IRCode, defuses::IdDict{Int, Tuple{SPCSet, SSADefUse
         if isa(typ, UnionAll)
             typ = unwrap_unionall(typ)
         end
-        # Could still end up here if we tried to setfield! and immutable, which would
+        # Could still end up here if we tried to setfield! on an immutable, which would
         # error at runtime, but is not illegal to have in the IR.
         ismutabletype(typ) || continue
         typ = typ::DataType
@@ -850,6 +850,7 @@ function sroa_mutables!(ir::IRCode, defuses::IdDict{Int, Tuple{SPCSet, SSADefUse
         for use in defuse.defs
             field = try_compute_fieldidx_stmt(ir, ir[SSAValue(use)]::Expr, typ)
             field === nothing && @goto skip
+            isconst(typ, field) && @goto skip # we discovered an attempt to mutate a const field, which must error
             push!(fielddefuse[field].defs, use)
         end
         # Check that the defexpr has defined values for all the fields

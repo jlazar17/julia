@@ -179,7 +179,12 @@ Base.isstructtype
 Base.nameof(::DataType)
 Base.fieldnames
 Base.fieldname
+Core.fieldtype
+Base.fieldtypes
+Base.fieldcount
 Base.hasfield
+Core.nfields
+Base.isconst
 ```
 
 ### Memory layout
@@ -189,9 +194,6 @@ Base.sizeof(::Type)
 Base.isconcretetype
 Base.isbits
 Base.isbitstype
-Core.fieldtype
-Base.fieldtypes
-Base.fieldcount
 Base.fieldoffset
 Base.datatype_alignment
 Base.datatype_haspadding
@@ -417,8 +419,6 @@ Base.@__DIR__
 Base.@__LINE__
 Base.fullname
 Base.names
-Core.nfields
-Base.isconst
 Base.nameof(::Function)
 Base.functionloc(::Any, ::Any)
 Base.functionloc(::Method)
