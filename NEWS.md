@@ -16,7 +16,7 @@ New language features
 * `try`-blocks can now optionally have an `else`-block which is executed right after the main body only if
   no errors were thrown. ([#42211])
 * Mutable struct fields may now be annotated as `const` to prevent changing, providing for greater clarity and
-  optimization ability of these objects ([#TBD]).
+  optimization ability of these objects ([#43305]).
 
 Language changes
 ----------------
